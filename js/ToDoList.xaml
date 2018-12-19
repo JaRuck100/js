@@ -1,0 +1,57 @@
+﻿<Window x:Class="js.ToDoList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ToDoList" Height="500" Width="600
+        ">
+    <Grid>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Label Content="ToDoListen" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" HorizontalAlignment="Center" FontSize="40"/>
+
+        <TreeView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="7">
+            
+        </TreeView>
+        
+        <Button Grid.Row="8" Grid.Column="0" Content="Neue Liste"/>
+        <Button Grid.Row="8" Grid.Column="1" Content="Neuer Eintrag"/>
+        <Button Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Content="Löschen"/>
+        
+        <Label Grid.Row="1" Grid.Column="2" Content="Titel"/>
+        <Label Grid.Row="2" Grid.Column="2" Content="Startdatum"/>
+        <Label Grid.Row="3" Grid.Column="2" Content="Enddatum"/>
+        <Label Grid.Row="4" Grid.Column="2" Content="Priorität"/>
+        <Label Grid.Row="6" Grid.Column="2" Content="Betroffene Kontakte"/>
+        <Label Grid.Row="7" Grid.Column="2" Content="Beschreibung"/>
+
+        <TextBox Grid.Row="1" Grid.Column="3" />
+        <DatePicker Grid.Row="2" Grid.Column="3"/>
+        <DatePicker Grid.Row="3" Grid.Column="3" />
+        <TextBlock Grid.Row="4" Grid.Column="3" />
+        <Button Grid.Row="5" Grid.Column="4" Content="Kontakte auswählen"/>
+        <ListBox Grid.Row="6" Grid.Column="3" />
+        <TextBlock Grid.Row="7" Grid.Column="3" />
+
+        <CheckBox Grid.Row="8" Grid.Column="3" Grid.ColumnSpan="2" Content="Erledigt" FontSize="30" HorizontalAlignment="Center"/>
+        
+    </Grid>
+</Window>
