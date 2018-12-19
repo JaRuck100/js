@@ -81,6 +81,7 @@
     </Compile>
     <Compile Include="Tables\UserTable.cs" />
     <Compile Include="Task.cs" />
+    <Compile Include="Test\ApplicationServiceTestsCases.cs" />
     <Compile Include="ToDoList.xaml.cs">
       <DependentUpon>ToDoList.xaml</DependentUpon>
     </Compile>

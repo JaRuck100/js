@@ -82,35 +82,35 @@ namespace js
 
         private static void createUserTable(SQLiteConnection dbConnection)
         {
-            string sql = "CREATE TABLE IF NOT EXISTS User (id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(255), password VARCHAR(225))";
+            string sql = "CREATE TABLE IF NOT EXISTS User (id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(255) NOT NULL, password VARCHAR(225) NOT NULL)";
             SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
             command.ExecuteNonQuery();
         }
 
         public static void createToDoListTable(SQLiteConnection dbConnection)
         {
-            string sql = "CREATE TABLE IF NOT EXISTS ToDoList (id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(255))";
+            string sql = "CREATE TABLE IF NOT EXISTS ToDoList (id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(255) NOT NULL, userId INTEGER, FOREIGN KEY(userId) REFERENCES User(id))";
             SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
             command.ExecuteNonQuery();
         }
 
         public static void createTaskTable(SQLiteConnection dbConnection)
         {
-            string sql = "CREATE TABLE IF NOT EXISTS Task (id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(255), startDate DATE, enddate DATE, toDoListId INT, priority INT, taskFinished INT DEFAULT 0)";
+            string sql = "CREATE TABLE IF NOT EXISTS Task (id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(255) NOT NULL, startDate DATE NOT NULL, enddate DATE NOT NULL, toDoListId INT, priority INT NOT NULL, taskFinished INT DEFAULT 0 NOT NULL, FOREIGN KEY(toDoListId) REFERENCES ToDoList(id))";
             SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
             command.ExecuteNonQuery();
         }
 
         public static void createContacts(SQLiteConnection dbConnection)
         {
-            string sql = "CREATE TABLE IF NOT EXISTS ContactTest (id INTEGER PRIMARY KEY AUTOINCREMENT, firstName VARCHAR(50), surname VARCHAR(50), phone VARCHAR(50), email VARCHAR(100), street VARCHAR(50), houseNumer VARCHAR(5), city VARCHAr(50), postalCode VARCHAR(5), picturePath VARCHAR(250))";
+            string sql = "CREATE TABLE IF NOT EXISTS Contact (id INTEGER PRIMARY KEY AUTOINCREMENT, firstName VARCHAR(50) NOT NULL, surname VARCHAR(50) NOT NULL, phone VARCHAR(50), email VARCHAR(100) NOT NULL, street VARCHAR(50) NOT NULL, city VARCHAR(50) NOT NULL, postalCode VARCHAR(5) NOT NULL, picturePath VARCHAR(250), userId INTEGER NOT NULL, FOREIGN KEY(userId) REFERENCES User(id))";
             SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
             command.ExecuteNonQuery();
         }
 
         public static void createTaskContactTable(SQLiteConnection dbConnection)
         {
-            string sql = "CREATE TABLE IF NOT EXISTS TaskContact (taskId INTEGER, contactId INT, PRIMARY KEY (taskId, contactId))";
+            string sql = "CREATE TABLE IF NOT EXISTS TaskContact (taskId INTEGER, contactId INT, PRIMARY KEY (taskId, contactId), FOREIGN KEY(taskId) REFERENCES Task(id), FOREIGN KEY(contactId) REFERENCES Contact(id))";
             SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
             command.ExecuteNonQuery();
         }

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace js
 {
-    class Contacts
+    public class Contacts
     {
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string Surname { get; set; }
         public string Phone { get; set; }
@@ -15,5 +15,6 @@ namespace js
         public string Street { get; set; }
         public string City { get; set; }
         public string Postalcode { get; set; }
+        public string PicturePath { get; set; }
     }
 }

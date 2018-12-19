@@ -50,7 +50,6 @@ namespace js
         {
             var username = usernameText.Text;
             var password = passwordText.Text;
-
             _service.CreateUser(username, password);
         }
     }
