@@ -28,13 +28,13 @@
         
         <Label Content="ToDoListen" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" HorizontalAlignment="Center" FontSize="40"/>
 
-        <TreeView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="7">
+        <TreeView x:Name="ToDoListList" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="7" TreeViewItem.Selected="ToDoListList_Selected" >
             
         </TreeView>
         
-        <Button Grid.Row="8" Grid.Column="0" Content="Neue Liste"/>
-        <Button Grid.Row="8" Grid.Column="1" Content="Neuer Eintrag"/>
-        <Button Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Content="Löschen"/>
+        <Button Grid.Row="8" Grid.Column="0" Content="Neue Liste" Click="Create_Click"/>
+        <Button Grid.Row="8" Grid.Column="1" Content="Neuer Eintrag" Click="CreateTask_Click"/>
+        <Button Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Content="Löschen" Click="Delete_Click"/>
         
         <Label Grid.Row="1" Grid.Column="2" Content="Titel"/>
         <Label Grid.Row="2" Grid.Column="2" Content="Startdatum"/>
@@ -43,15 +43,15 @@
         <Label Grid.Row="6" Grid.Column="2" Content="Betroffene Kontakte"/>
         <Label Grid.Row="7" Grid.Column="2" Content="Beschreibung"/>
 
-        <TextBox Grid.Row="1" Grid.Column="3" />
-        <DatePicker Grid.Row="2" Grid.Column="3"/>
-        <DatePicker Grid.Row="3" Grid.Column="3" />
-        <TextBlock Grid.Row="4" Grid.Column="3" />
+        <TextBox Grid.Row="1" Grid.Column="3" Name ="Title" />
+        <DatePicker Grid.Row="2" Grid.Column="3" Name="StartDate"/>
+        <DatePicker Grid.Row="3" Grid.Column="3" Name="EndDate"/>
+        <TextBox Grid.Row="4" Grid.Column="3" Name="Priority"/>
         <Button Grid.Row="5" Grid.Column="4" Content="Kontakte auswählen"/>
         <ListBox Grid.Row="6" Grid.Column="3" />
-        <TextBlock Grid.Row="7" Grid.Column="3" />
+        <TextBox Grid.Row="7" Grid.Column="3" Name="Description"/>
 
-        <CheckBox Grid.Row="8" Grid.Column="3" Grid.ColumnSpan="2" Content="Erledigt" FontSize="30" HorizontalAlignment="Center"/>
+        <CheckBox Grid.Row="8" Grid.Column="3" Grid.ColumnSpan="2" Content="Erledigt" FontSize="30" HorizontalAlignment="Center" Name="TaskFinished"/>
         
     </Grid>
 </Window>

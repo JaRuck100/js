@@ -13,6 +13,7 @@ namespace js
         public DateTime EndDate { get; set; }
         public int Priority { get; set; }
         public bool TaskFininshed { get; set; }
+        public string Description { get; set; }
     }
 
 }

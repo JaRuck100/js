@@ -73,7 +73,16 @@
     <Compile Include="Contact.xaml.cs">
       <DependentUpon>Contact.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ContactAdd.xaml.cs">
+      <DependentUpon>ContactAdd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ContactEdit.xaml.cs">
+      <DependentUpon>ContactEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Contacts.cs" />
+    <Compile Include="CreateToDoList.xaml.cs">
+      <DependentUpon>CreateToDoList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseConnection.cs" />
     <Compile Include="ApplicationService.cs" />
     <Compile Include="NewContact.xaml.cs">
@@ -93,6 +102,18 @@
       <DependentUpon>Welcome.xaml</DependentUpon>
     </Compile>
     <Page Include="Contact.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ContactAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ContactEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CreateToDoList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

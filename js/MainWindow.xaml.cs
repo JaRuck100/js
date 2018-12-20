@@ -40,7 +40,7 @@ namespace js
                 passwortUsernameRight = true;
             if (passwortUsernameRight)
             {
-                Welcome nextpage = new Welcome();
+                Welcome nextpage = new Welcome(list[0].Id);
                 nextpage.Show();
                 this.Close();
             }

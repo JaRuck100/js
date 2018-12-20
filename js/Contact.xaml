@@ -13,20 +13,23 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0"/>
         </Grid.ColumnDefinitions>
 
         <Label Grid.ColumnSpan="3" Grid.Row="0" Content="Kontaktliste" Margin="8"/>
 
-        <ListView Grid.ColumnSpan="3" Margin="8" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <ListView x:Name="contactView" Grid.ColumnSpan="3" Margin="8" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionChanged="selectedElement">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name" Width="120" />
-                    <GridViewColumn Header="Vorname" Width="120"/>
-                    <GridViewColumn Header="Straße und Hausnummer" Width="200"/>
-                    <GridViewColumn Header="PLZ" Width="100"/>
-                    <GridViewColumn Header="Stadt" Width="120"/>
-                    <GridViewColumn Header="Telefon" Width="120"/>
-                    <GridViewColumn Header="Mail" Width="120"/>
+                    <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Surname}"/>
+                    <GridViewColumn Header="Vorname" Width="120" DisplayMemberBinding="{Binding FirstName}"/>
+                    <GridViewColumn Header="Straße und Hausnummer" Width="200" DisplayMemberBinding="{Binding Street}"/>
+                    <GridViewColumn Header="PLZ" Width="100" DisplayMemberBinding="{Binding Postalcode}"/>
+                    <GridViewColumn Header="Stadt" Width="120" DisplayMemberBinding="{Binding City}"/>
+                    <GridViewColumn Header="Telefon" Width="120" DisplayMemberBinding="{Binding Phone}"/>
+                    <GridViewColumn Header="Mail" Width="120" DisplayMemberBinding="{Binding Email}"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Id}"/>
+                    
                     
                 </GridView>
             </ListView.View>

@@ -20,5 +20,7 @@ namespace js.Test
         //List<Contacts> contacts =_service.getContactsByUserId(1);
         //List<Task> tasks = _service.getTaksByToDoListId(1);
         //Dictionary<int, string> toDoLists = _service.getToDoListsByUserId(1);
+        //_service.updateContactTable(new Contacts() { Id = 7, FirstName = "alama", Surname = "Hibba", Phone = "01856464", Email = "brabbel@blubb.de", Street = "Dudeldumm 4", City = "Büddelsheim", Postalcode = "74563", PicturePath = "" });
+        //_service.updateToDoListTable(4, "humbahumba");
     }
 }

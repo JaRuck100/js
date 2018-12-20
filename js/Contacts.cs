@@ -16,5 +16,6 @@ namespace js
         public string City { get; set; }
         public string Postalcode { get; set; }
         public string PicturePath { get; set; }
+        public int UserId { get; set; }
     }
 }
