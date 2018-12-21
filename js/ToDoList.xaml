@@ -28,7 +28,7 @@
         
         <Label Content="ToDoListen" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" HorizontalAlignment="Center" FontSize="40"/>
 
-        <TreeView x:Name="ToDoListList" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="7" TreeViewItem.Selected="ToDoListList_Selected" >
+        <TreeView x:Name="ToDoListList" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="7" TreeViewItem.Selected="Object_Selected" >
             
         </TreeView>
         

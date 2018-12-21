@@ -36,11 +36,6 @@ namespace js
                 createDatbase();
                 var connection = openConnection();
                 createTables(connection);
-
-                /*string sql = "insert into User (id ,username , password ) values (1, 'sunny', '"+sha1("blub")+"')";
-                SQLiteCommand command = new SQLiteCommand(sql, connection);
-                command.ExecuteNonQuery();*/
-
                 connection.Close();
             }
         }
@@ -57,19 +52,8 @@ namespace js
         {
             SQLiteConnection dbConnection = new SQLiteConnection("Data Source=ToDoListDatabase.sqlite;Version=3;");
             dbConnection.Open();
-            //createTables(dbConnection);
             return dbConnection;
         }
-
-        ////string sql = "create table highscores (name varchar(20), score int)";
-        //string sql = "insert into highscores (name, score) values ('Me', 3000)";
-        //SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
-        //command.ExecuteNonQuery();
-        //string sql1 = "select * from highscores order by score desc";
-        //SQLiteCommand command1 = new SQLiteCommand(sql1, m_dbConnection);
-        //SQLiteDataReader reader = command1.ExecuteReader();
-        //while (reader.Read())
-        //    Console.WriteLine("Name: " + reader["name"] + "\tScore: " + reader["score"]);
 
         public static void createTables(SQLiteConnection dbConnection)
         {
