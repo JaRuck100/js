@@ -1,4 +1,5 @@
-﻿using System;
+﻿using js.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,19 +18,19 @@ namespace js
     /// <summary>
     /// Interaktionslogik für Contact.xaml
     /// </summary>
-    public partial class Contact : Window
+    public partial class ContactWindow : Window
     {
         ApplicationService _service;
         int userId;
-        Contacts selectedContact;
+        Contact selectedContact;
 
-        public Contact(int userId)
+        public ContactWindow(int userId)
         {
             InitializeComponent();
             _service = new ApplicationService();
             this.userId = userId;
-            List<Contacts> contacts = _service.getContactsByUserId(userId);
-            foreach (Contacts contact in contacts)
+            List<Contact> Contact = _service.GetContactsByUserId(userId);
+            foreach (Contact contact in Contact)
             {
                 this.contactView.Items.Add(contact);
             }
@@ -40,15 +41,15 @@ namespace js
         {
             if (selectedContact != null)
             {
-                ContactEdit nextpage = new ContactEdit(selectedContact, userId);
-                nextpage.Show();
-                this.Close();
-            }
+				ContactAdd nextpage = new ContactAdd(selectedContact, userId);
+				nextpage.Show();
+				this.Close();
+			}
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            ContactAdd nextpage = new ContactAdd(userId);
+            ContactAdd nextpage = new ContactAdd(null, userId);
             nextpage.Show();
             this.Close();
         }
@@ -58,7 +59,7 @@ namespace js
             if (selectedContact != null)
             {
                 _service.DeleteContact(selectedContact.Id);
-                Contact nextpage = new Contact(userId);
+				ContactWindow nextpage = new ContactWindow(userId);
                 nextpage.Show();
                 this.Close();
             }
@@ -67,7 +68,7 @@ namespace js
 
         private void selectedElement(object sender, SelectionChangedEventArgs e)
         {
-            selectedContact = (Contacts) e.AddedItems[0];
+            selectedContact = (Contact) e.AddedItems[0];
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using js.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,7 +34,7 @@ namespace js
             string title = Title.Text;
             if (!_service.IsToDoListTitleAlreadyUsed(title))
             {
-                _service.CreateToDoList(Title.Text, userId);
+                _service.CreateToDoList(new ToDoList() { Title = title, UserId = userId });
                 this.Close();
                 Back_Click(sender, e);
                 
@@ -43,7 +44,7 @@ namespace js
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            ToDoList nextpage = new ToDoList(userId);
+			ToDoListWindow nextpage = new ToDoListWindow(userId);
             nextpage.ShowDialog();
 
         }

@@ -9,11 +9,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>js</RootNamespace>
     <AssemblyName>js</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <NuGetPackageImportStamp>762d46e2</NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.5\lib\net451\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -70,46 +74,37 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Contact.xaml.cs">
-      <DependentUpon>Contact.xaml</DependentUpon>
+    <Compile Include="ContactWindow.xaml.cs">
+      <DependentUpon>ContactWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ContactAdd.xaml.cs">
       <DependentUpon>ContactAdd.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ContactEdit.xaml.cs">
-      <DependentUpon>ContactEdit.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Contacts.cs" />
+    <Compile Include="Entities\Contact.cs" />
     <Compile Include="CreateToDoList.xaml.cs">
       <DependentUpon>CreateToDoList.xaml</DependentUpon>
     </Compile>
     <Compile Include="DatabaseConnection.cs" />
     <Compile Include="ApplicationService.cs" />
-    <Compile Include="NewContact.xaml.cs">
-      <DependentUpon>NewContact.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Entities\ToDoList.cs" />
     <Compile Include="Tables\UserTable.cs" />
-    <Compile Include="Task.cs" />
+    <Compile Include="Entities\Task.cs" />
     <Compile Include="Test\ApplicationServiceTestsCases.cs" />
-    <Compile Include="ToDoList.xaml.cs">
-      <DependentUpon>ToDoList.xaml</DependentUpon>
+    <Compile Include="ToDoListWindow.xaml.cs">
+      <DependentUpon>ToDoListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ToDoListContact.xaml.cs">
       <DependentUpon>ToDoListContact.xaml</DependentUpon>
     </Compile>
-    <Compile Include="User.cs" />
+    <Compile Include="Entities\User.cs" />
     <Compile Include="Welcome.xaml.cs">
       <DependentUpon>Welcome.xaml</DependentUpon>
     </Compile>
-    <Page Include="Contact.xaml">
+    <Page Include="ContactWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ContactAdd.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ContactEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -129,11 +124,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="NewContact.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ToDoList.xaml">
+    <Page Include="ToDoListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

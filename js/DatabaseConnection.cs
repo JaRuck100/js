@@ -60,7 +60,7 @@ namespace js
             createUserTable(dbConnection);
             createToDoListTable(dbConnection);
             createTaskTable(dbConnection);
-            createContacts(dbConnection);
+            createContact(dbConnection);
             createTaskContactTable(dbConnection);
         }
 
@@ -85,7 +85,7 @@ namespace js
             command.ExecuteNonQuery();
         }
 
-        public static void createContacts(SQLiteConnection dbConnection)
+        public static void createContact(SQLiteConnection dbConnection)
         {
             string sql = "CREATE TABLE IF NOT EXISTS Contact (id INTEGER PRIMARY KEY AUTOINCREMENT, firstName VARCHAR(50) NOT NULL, surname VARCHAR(50) NOT NULL, phone VARCHAR(50), email VARCHAR(100) NOT NULL, street VARCHAR(50) NOT NULL, city VARCHAR(50) NOT NULL, postalCode VARCHAR(5) NOT NULL, picturePath VARCHAR(250), userId INTEGER NOT NULL, FOREIGN KEY(userId) REFERENCES User(id))";
             SQLiteCommand command = new SQLiteCommand(sql, dbConnection);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace js
+namespace js.Entities
 {
     public class Task
     {
@@ -14,6 +14,7 @@ namespace js
         public int Priority { get; set; }
         public bool TaskFininshed { get; set; }
         public string Description { get; set; }
-    }
+		public int ToDoListId { get; set; }
+	}
 
 }

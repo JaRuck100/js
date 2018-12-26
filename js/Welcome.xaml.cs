@@ -19,26 +19,31 @@ namespace js
     /// </summary>
     public partial class Welcome : Window
     {
-        int userId;
+		int userId;
 
-        public Welcome(int userId)
-        {
-            InitializeComponent();
-            this.userId = userId;
+		public Welcome(int userId)
+		{
+			InitializeComponent();
+			this.userId = userId;
+		}
 
-        }
+		private void ToDo_Click(object sender, RoutedEventArgs e)
+		{
+			ToDoListWindow nextpage = new ToDoListWindow(userId);
+			nextpage.ShowDialog();
+		}
 
-        private void ToDo_Click(object sender, RoutedEventArgs e)
-        {
-            ToDoList nextpage = new ToDoList(userId);
-            nextpage.ShowDialog();
-        }
+		private void Contact_Click(object sender, RoutedEventArgs e)
+		{
+			ContactWindow nextpage = new ContactWindow(userId);
+			nextpage.ShowDialog();
+		}
 
-        private void Contact_Click(object sender, RoutedEventArgs e)
-        {
-            Contact nextpage = new Contact(userId);
-            nextpage.ShowDialog();
-
-        }
-    }
+		private void Logout_Click(object sender, RoutedEventArgs e)
+		{
+			MainWindow nextPage = new MainWindow();
+			this.Close();
+			nextPage.ShowDialog();
+		}
+	}
 }

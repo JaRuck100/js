@@ -1,7 +1,7 @@
-﻿<Window x:Class="js.ToDoList"
+﻿<Window x:Class="js.ToDoListWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ToDoList" Height="500" Width="600
+        Height="500" Width="600
         ">
     <Grid>
         
