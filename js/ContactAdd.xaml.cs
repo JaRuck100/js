@@ -50,9 +50,14 @@ namespace js
 
 		private void Add_Click(object sender, RoutedEventArgs e)
 		{
-			Entities.Contact newContact = new Entities.Contact() { FirstName = FirstName.Text, Surname = Surname.Text, Phone = Phone.Text, Street = Street.Text, City = City.Text, Email = Email.Text, Postalcode = Postalcode.Text, PicturePath = PicturePath.Text, UserId = this.userId, Id = contactId };
-			_service.CreateOrUpdateContact(newContact);
-			Back_Click(sender, e);
+			if (FirstName.Text.Length + Surname.Text.Length == 0)
+				errorMessageContact.Content = "Es muss mindestens der Vor- oder Nachname gegeben werden.";
+			else
+			{
+				Entities.Contact newContact = new Entities.Contact() { FirstName = FirstName.Text, Surname = Surname.Text, Phone = Phone.Text, Street = Street.Text, City = City.Text, Email = Email.Text, Postalcode = Postalcode.Text, PicturePath = PicturePath.Text, UserId = this.userId, Id = contactId };
+				_service.CreateOrUpdateContact(newContact);
+				Back_Click(sender, e);
+			}
 
 		}
 

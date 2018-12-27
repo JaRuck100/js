@@ -28,12 +28,9 @@
                     <GridViewColumn Header="Stadt" Width="120" DisplayMemberBinding="{Binding City}"/>
                     <GridViewColumn Header="Telefon" Width="120" DisplayMemberBinding="{Binding Phone}"/>
                     <GridViewColumn Header="Mail" Width="120" DisplayMemberBinding="{Binding Email}"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Id}"/>
-                    
-                    
+                    <GridViewColumn DisplayMemberBinding="{Binding Id}" Width="0"/>
                 </GridView>
             </ListView.View>
-
         </ListView>
 
         <Button Margin="8" Grid.Row="2" Grid.Column="0" Content="Bearbeiten" Click="Edit_Click"/>
