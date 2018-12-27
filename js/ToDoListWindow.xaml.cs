@@ -20,19 +20,17 @@ namespace js
     /// </summary>
     public partial class ToDoListWindow : Window
     {
-        int userId;
+        int _userId;
         ApplicationService _service;
-        string objectTitle;
-        string objectName;
-        bool isToDoList = false;
-        bool isTask = false;
-
-		int selectedToDoId;
+        string _objectTitle;
+        string _objectName;
+		int _taskId;
+		int _toDoId;
 
 		public ToDoListWindow(int userId)
         {
             InitializeComponent();
-            this.userId = userId;
+            _userId = userId;
             _service = new ApplicationService();
             List<ToDoList> toDoLists = _service.GetToDoListsByUserId(userId);
 
@@ -49,7 +47,7 @@ namespace js
                 {
                     TreeViewItem taskTitle = new TreeViewItem();
                     taskTitle.Header = task.Title;
-                    taskTitle.Name = "task" + task.id.ToString();
+                    taskTitle.Name = "task" + task.Id.ToString();
                     toDoListTitle.Items.Add(taskTitle);                  
                 }
             }      
@@ -58,7 +56,7 @@ namespace js
         private void Create_Click(object sender, RoutedEventArgs e)
         {
 			this.Close();
-            CreateToDoList nextpage = new CreateToDoList(userId, 0);
+            CreateToDoList nextpage = new CreateToDoList(_userId, 0);
             nextpage.ShowDialog();
             
         }
@@ -66,7 +64,7 @@ namespace js
 		private void Edit_Click(object sender, RoutedEventArgs e)
 		{
 			this.Close();
-			CreateToDoList nextpage = new CreateToDoList(userId, selectedToDoId);
+			CreateToDoList nextpage = new CreateToDoList(_userId, _toDoId);
 			nextpage.ShowDialog();
 		}
 
@@ -77,70 +75,38 @@ namespace js
 			{
 				var x = item.Name.Replace("toDoList", "");
 
-				selectedToDoId = int.Parse(x);
+				_toDoId = int.Parse(x);
+			}
+			else if (item.Name.Contains("task"))
+			{
+				var x = item.Name.Replace("task", "");
+				_taskId = int.Parse(x);
 			}
 		}
 
 		private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            if(isToDoList)
+            if(_toDoId != 0)
             {
                 this.Close();
-                int toDoListId = Convert.ToInt32(objectName.Replace("doDoList", "")); 
-                _service.DeleteToDoList(toDoListId);
-				ToDoListWindow nextpage = new ToDoListWindow(userId);
+                _service.DeleteToDoList(_toDoId);
+				ToDoListWindow nextpage = new ToDoListWindow(_userId);
                 nextpage.ShowDialog();
             }
-            else if (isTask)
+            else if (_taskId != 0)
             {
                 this.Close();
-                int taskId = Convert.ToInt32(objectName.Replace("task", ""));
-                _service.DeleteTask(taskId);
-				ToDoListWindow nextpage = new ToDoListWindow(userId);
+                _service.DeleteTask(_taskId);
+				ToDoListWindow nextpage = new ToDoListWindow(_userId);
                 nextpage.ShowDialog();
-            }
-        }
-
-        private void Object_Selected(object sender, RoutedEventArgs e)
-        {
-            TreeViewItem selectetItem = (TreeViewItem) e.OriginalSource;
-            objectTitle = (string) selectetItem.Header;
-            objectName = selectetItem.Name;
-            isToDoList = objectName.Contains("doDoList");
-            isTask = objectName.Contains("task");
-            if (isTask)
-            {
-                int taskId = Convert.ToInt32(objectName.Replace("task", ""));
-                Task task =_service.GetTaskById(taskId);
-                Title.Text = task.Title;
-                StartDate.Text = task.StartDate.ToString("d");
-                EndDate.Text = task.EndDate.ToString("d");
-                Priority.Text = task.Priority.ToString();
-                Description.Text = task.Description;
-                TaskFinished.IsChecked = task.TaskFininshed;
             }
         }
 
 		private void CreateTask_Click(object sender, RoutedEventArgs e)
         {
-            if (isToDoList)
-            {
-                this.Close();
-                bool isCecked = false;
-                if (TaskFinished.IsChecked == true)
-                {
-                    isCecked = true;
-                }
-                int toDoListId = Convert.ToInt32(objectName.Replace("doDoList", ""));
-                _service.CreateTask(new Task() { Title = Title.Text, StartDate = DateTime.Parse(StartDate.Text), EndDate = DateTime.Parse(EndDate.Text), Priority = Int32.Parse(Priority.Text), Description = Description.Text, TaskFininshed = isCecked, ToDoListId = toDoListId });
-				// TO DO: Add selected Cotacts to TaskContact Table
-				ToDoListWindow nextpage = new ToDoListWindow(userId);
-                nextpage.ShowDialog();
-            }
-
-
+				this.Close();
+				TaskWindow nextpage = new TaskWindow(_toDoId, _taskId, _userId);
+				nextpage.ShowDialog();
         }
-
-	
 	}
 }
