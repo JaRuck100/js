@@ -1,29 +1,19 @@
 ﻿using js.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Task = js.Entities.Task;
 namespace js
 {
-    /// <summary>
-    /// Interaktionslogik für ToDoList.xaml
-    /// </summary>
-    public partial class ToDoListWindow : Window
+	/// <summary>
+	/// Interaktionslogik für ToDoList.xaml
+	/// </summary>
+	public partial class ToDoListWindow : Window
     {
         int _userId;
         ApplicationService _service;
-        string _objectTitle;
-        string _objectName;
 		int _taskId;
 		int _toDoId;
 
@@ -47,13 +37,17 @@ namespace js
                 {
                     TreeViewItem taskTitle = new TreeViewItem();
                     taskTitle.Header = task.Title;
-                    taskTitle.Name = "task" + task.Id.ToString();
+
+					if (_service.GetBoolFromTask(task.Id))
+						taskTitle.Header += " (erledigt)";
+
+					taskTitle.Name = "task" + task.Id.ToString();
                     toDoListTitle.Items.Add(taskTitle);                  
                 }
             }      
         }
 
-        private void Create_Click(object sender, RoutedEventArgs e)
+		private void Create_Click(object sender, RoutedEventArgs e)
         {
 			this.Close();
             CreateToDoList nextpage = new CreateToDoList(_userId, 0);

@@ -42,6 +42,7 @@ namespace js
 			{ 
 				Textlabel.Content = "Task bearbeiten";
 				Task task = _service.GetTaskById(_taskId);
+				task.TaskFininshed = _service.GetBoolFromTask(_taskId);
 
 				TaskTitle.Text = task.Title;
 				StartDate.Text = task.StartDate.ToString("d");

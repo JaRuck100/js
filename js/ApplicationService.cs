@@ -132,10 +132,18 @@ namespace js
 		public Task GetTaskById(int taskId)
 		{
 			var sql = "SELECT * FROM Task WHERE id = @TaskId";
-
 			using (var con = GetSQLiteConnection())
 			{
 				return con.Query<Task>(sql, new { TaskId = taskId }).FirstOrDefault();
+			}
+		}
+
+		public bool GetBoolFromTask(int taskId)
+		{
+			var sql = "SELECT taskFinished FROM Task WHERE id = @TaskId";
+			using (var con = GetSQLiteConnection())
+			{
+				return con.Query<Boolean>(sql, new { TaskId = taskId }).FirstOrDefault();
 			}
 		}
 
