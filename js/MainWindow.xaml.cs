@@ -25,6 +25,7 @@ namespace js
 		public MainWindow()
 		{
 			InitializeComponent();
+			DatabaseConnection.Seed();
 			_service = new ApplicationService();
 		}
 

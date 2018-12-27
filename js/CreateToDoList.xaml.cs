@@ -21,32 +21,46 @@ namespace js
     public partial class CreateToDoList : Window
     {
         ApplicationService _service;
-        int userId;
-        public CreateToDoList(int userId)
+        int _userId;
+		int _toDoListId;
+
+        public CreateToDoList(int userId, int toDoListId)
         {
-            this.userId = userId;
+            this._userId = userId;
             InitializeComponent();
-        }
+			_service = new ApplicationService();
+
+			if (toDoListId != 0)
+			{
+				ToDoList toDoList = _service.GetToDoById(toDoListId);
+				
+				Title.Text = toDoList.Title;
+				_toDoListId = toDoList.Id;
+				this._userId = toDoList.UserId;
+
+				CreateUpdateTitleToDo.Content = "Liste bearbeiten";
+			}
+			else
+				CreateUpdateTitleToDo.Content = "Neue Liste hinzufügen";
+
+		}
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            _service = new ApplicationService();
             string title = Title.Text;
             if (!_service.IsToDoListTitleAlreadyUsed(title))
             {
-                _service.CreateToDoList(new ToDoList() { Title = title, UserId = userId });
+                _service.CreateOrUpdateToDoList(new ToDoList() { Title = title, UserId = _userId, Id = _toDoListId });
                 this.Close();
-                Back_Click(sender, e);
-                
+				Back_Click(sender, e);
             }
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-			ToDoListWindow nextpage = new ToDoListWindow(userId);
+			ToDoListWindow nextpage = new ToDoListWindow(_userId);
             nextpage.ShowDialog();
-
         }
     }
 }

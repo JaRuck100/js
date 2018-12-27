@@ -4,8 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:js"
-        mc:Ignorable="d"
-        Title="CreateToDoList" Height="300" Width="700">
+        mc:Ignorable="d" Height="160" Width="400">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -13,16 +12,14 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Content="Liste hinzufügen" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" HorizontalAlignment="Center" FontSize="40"/>
-        <Label Grid.Row="2" Grid.Column="0" Content="Titel"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Name="Title"/>
-        <Button Grid.Row="4" Grid.Column="0" Content="Abbrechen" Click="Back_Click"/>
-        <Button Grid.Row="4" Grid.Column="1" Content="Hinzufügen" Click="Add_Click"/>
+        <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" HorizontalAlignment="Center" FontSize="30" x:Name="CreateUpdateTitleToDo"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="Titel"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Name="Title" Margin="8"/>
+        <Button Grid.Row="2" Grid.Column="0" Content="Abbrechen" Click="Back_Click" Margin="8"/>
+        <Button Grid.Row="2" Grid.Column="1" Content="Speichern" Click="Add_Click" Margin="8"/>
 
     </Grid>
 </Window>

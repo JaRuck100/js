@@ -28,30 +28,30 @@
         
         <Label Content="ToDoListen" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" HorizontalAlignment="Center" FontSize="40"/>
 
-        <TreeView x:Name="ToDoListList" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="7" TreeViewItem.Selected="Object_Selected" >
-            
-        </TreeView>
-        
-        <Button Grid.Row="8" Grid.Column="0" Content="Neue Liste" Click="Create_Click"/>
-        <Button Grid.Row="8" Grid.Column="1" Content="Neuer Eintrag" Click="CreateTask_Click"/>
-        <Button Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Content="Löschen" Click="Delete_Click"/>
-        
-        <Label Grid.Row="1" Grid.Column="2" Content="Titel"/>
+        <TreeView x:Name="ToDoListList" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="7" SelectedItemChanged="selectedElement" />
+
+        <Button Grid.Row="8" Grid.Column="0" Content="Neue Liste" Click="Create_Click" Margin="8"/>
+        <Button Grid.Row="8" Grid.Column="1" Content="Neuer Eintrag" Click="CreateTask_Click" Margin="8"/>
+        <Button Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="1" Content="Löschen" Click="Delete_Click" Margin="8"/>
+
+        <Button Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="1" Content="Liste bearbeiten" Click="Edit_Click" Margin="8"/>
+
+        <Label Grid.Row="1" Grid.Column="2" Content="Titel" />
         <Label Grid.Row="2" Grid.Column="2" Content="Startdatum"/>
         <Label Grid.Row="3" Grid.Column="2" Content="Enddatum"/>
         <Label Grid.Row="4" Grid.Column="2" Content="Priorität"/>
         <Label Grid.Row="6" Grid.Column="2" Content="Betroffene Kontakte"/>
         <Label Grid.Row="7" Grid.Column="2" Content="Beschreibung"/>
 
-        <TextBox Grid.Row="1" Grid.Column="3" Name ="Title" />
-        <DatePicker Grid.Row="2" Grid.Column="3" Name="StartDate"/>
-        <DatePicker Grid.Row="3" Grid.Column="3" Name="EndDate"/>
-        <TextBox Grid.Row="4" Grid.Column="3" Name="Priority"/>
-        <Button Grid.Row="5" Grid.Column="4" Content="Kontakte auswählen"/>
-        <ListBox Grid.Row="6" Grid.Column="3" />
-        <TextBox Grid.Row="7" Grid.Column="3" Name="Description"/>
+        <TextBox Grid.Row="1" Grid.Column="3" Name ="Title" Margin="8"/>
+        <DatePicker Grid.Row="2" Grid.Column="3" Name="StartDate" Margin="8"/>
+        <DatePicker Grid.Row="3" Grid.Column="3" Name="EndDate" Margin="8"/>
+        <TextBox Grid.Row="4" Grid.Column="3" Name="Priority" Margin="8"/>
+        <Button Grid.Row="5" Grid.Column="4" Content="Kontakte auswählen" Margin="8"/>
+        <ListBox Grid.Row="6" Grid.Column="3" Margin="8"/>
+        <TextBox Grid.Row="7" Grid.Column="3" Name="Description" Margin="8"/>
 
-        <CheckBox Grid.Row="8" Grid.Column="3" Grid.ColumnSpan="2" Content="Erledigt" FontSize="30" HorizontalAlignment="Center" Name="TaskFinished"/>
+        <CheckBox Grid.Row="8" Grid.Column="3" Grid.ColumnSpan="2" Content="Erledigt" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Name="TaskFinished" />
         
     </Grid>
 </Window>

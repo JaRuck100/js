@@ -52,6 +52,17 @@ namespace js
 			return false;
 		}
 
+		internal ToDoList GetToDoById(int toDoListId)
+		{
+			string sql = "Select * from ToDoList where id = @ToDoListId";
+
+			using (var conn = GetSQLiteConnection())
+			{
+				return conn.Query<ToDoList>(sql, new { ToDoListId = toDoListId }).FirstOrDefault();
+			}
+
+		}
+
 		public bool IsUsernameAlreadyUsed(string username, SQLiteConnection conn)
 		{
 			return IsValueAlreadyUsed(username, "User", "username", conn);
@@ -103,11 +114,20 @@ namespace js
 			return IsValueAlreadyUsed(title, "ToDoList", "Title", conn);
 		}
 
-		public Dictionary<int, string> getToDoListsByUserId(int userId)
+		public List<ToDoList> GetToDoListsByUserId(int userId)
 		{
+			string sql = "SELECT * FROM ToDoList WHERE userId = @UserId";
+
+			using (var con = GetSQLiteConnection())
+			{
+				return con.Query<ToDoList>(sql, new { UserId = userId }).ToList();
+			}
+
+
+			/*
 			Dictionary<int, string> toDoLists = new Dictionary<int, string>();
 			var conn = DatabaseConnection.openConnection();
-			string sql = "SELECT id, title FROM ToDoList WHERE userId = " + userId;
+			
 			SQLiteCommand command = new SQLiteCommand(sql, conn);
 			command.ExecuteNonQuery();
 			SQLiteDataReader reader = command.ExecuteReader();
@@ -116,14 +136,21 @@ namespace js
 				toDoLists.Add(reader.GetInt32(0), reader.GetString(1));
 			}
 			conn.Close();
-			return toDoLists;
+			return toDoLists;*/
 		}
 
-		public List<Task> getTaksByToDoListId(int toDoListId)
+		public List<Task> GetTaksByToDoListId(int toDoListId)
 		{
-			List<Task> tasks = new List<Task>();
+			string sql = "SELECT * FROM Task WHERE toDoListId = @ToDoListId";
+
+			using (var conn = GetSQLiteConnection())
+			{
+				return conn.Query<Task>(sql, new { ToDoListId = toDoListId }).ToList();
+			}
+
+			/*List<Task> tasks = new List<Task>();
 			var conn = DatabaseConnection.openConnection();
-			string sql = "SELECT * FROM Task WHERE toDoListId = " + toDoListId;
+		
 			SQLiteCommand command = new SQLiteCommand(sql, conn);
 			command.ExecuteNonQuery();
 			SQLiteDataReader reader = command.ExecuteReader();
@@ -132,7 +159,7 @@ namespace js
 				tasks.Add(new Task() { id = reader.GetInt32(0), Title = reader.GetString(1), StartDate = DateTime.Parse(reader.GetString(2)), EndDate = DateTime.Parse(reader.GetString(3)), Priority = reader.GetInt32(5), TaskFininshed = reader.GetBoolean(6) });
 			}
 			conn.Close();
-			return tasks;
+			return tasks;*/
 		}
 
 		public List<Entities.Contact> GetContactsByUserId(int userId)
@@ -197,12 +224,16 @@ namespace js
 		}
 
 
-		public void CreateToDoList(ToDoList toDoList)
+		public void CreateOrUpdateToDoList(ToDoList toDoList)
 		{
 			string sql = "INSERT INTO ToDoList (title, userId) VALUES(@Title, @UserId)";
+			string sqlUpdate = "Update ToDoList SET title = @Title where id = @Id";
 			using (var conn = GetSQLiteConnection())
 			{
-				conn.Execute(sql, toDoList);
+				if (toDoList.Id == 0)
+					conn.Execute(sql, toDoList);
+				else
+					conn.Execute(sqlUpdate, toDoList);
 			}
 		}
 

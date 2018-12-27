@@ -8,7 +8,7 @@ namespace js.Entities
 {
 	public class ToDoList
 	{
-		public int ToDoListId { get; set; }
+		public int Id { get; set; }
 		public string Title { get; set; }
 		public int UserId { get; set; }
 

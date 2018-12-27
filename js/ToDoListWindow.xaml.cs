@@ -27,19 +27,24 @@ namespace js
         bool isToDoList = false;
         bool isTask = false;
 
-        public ToDoListWindow(int userId)
+		int selectedToDoId;
+
+		public ToDoListWindow(int userId)
         {
             InitializeComponent();
             this.userId = userId;
             _service = new ApplicationService();
-            Dictionary<int, string> toDoLists = _service.getToDoListsByUserId(userId);
-            foreach (var list in toDoLists)
+            List<ToDoList> toDoLists = _service.GetToDoListsByUserId(userId);
+
+			ToDoListList.Items.Clear();
+
+			foreach (var toDoListItem in toDoLists)
             {
                 TreeViewItem toDoListTitle = new TreeViewItem();
-                toDoListTitle.Header = list.Value;
-                toDoListTitle.Name = "doDoList" + list.Key.ToString(); 
+                toDoListTitle.Header = toDoListItem.Title;
+                toDoListTitle.Name = "toDoList" + toDoListItem.Id.ToString(); 
                 ToDoListList.Items.Add(toDoListTitle);
-                List<Task> tasks = _service.getTaksByToDoListId(list.Key);
+                List<Task> tasks = _service.GetTaksByToDoListId(toDoListItem.Id);
                 foreach (var task in tasks)
                 {
                     TreeViewItem taskTitle = new TreeViewItem();
@@ -47,18 +52,36 @@ namespace js
                     taskTitle.Name = "task" + task.id.ToString();
                     toDoListTitle.Items.Add(taskTitle);                  
                 }
-            }        
+            }      
         }
 
         private void Create_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
-            CreateToDoList nextpage = new CreateToDoList(userId);
+			this.Close();
+            CreateToDoList nextpage = new CreateToDoList(userId, 0);
             nextpage.ShowDialog();
             
         }
 
-        private void Delete_Click(object sender, RoutedEventArgs e)
+		private void Edit_Click(object sender, RoutedEventArgs e)
+		{
+			this.Close();
+			CreateToDoList nextpage = new CreateToDoList(userId, selectedToDoId);
+			nextpage.ShowDialog();
+		}
+
+		private void selectedElement(object sender, RoutedPropertyChangedEventArgs<object> e )
+		{
+			var item = (TreeViewItem)e.NewValue;
+			if (item.Name.Contains("toDoList"))
+			{
+				var x = item.Name.Replace("toDoList", "");
+
+				selectedToDoId = int.Parse(x);
+			}
+		}
+
+		private void Delete_Click(object sender, RoutedEventArgs e)
         {
             if(isToDoList)
             {
@@ -98,7 +121,7 @@ namespace js
             }
         }
 
-        private void CreateTask_Click(object sender, RoutedEventArgs e)
+		private void CreateTask_Click(object sender, RoutedEventArgs e)
         {
             if (isToDoList)
             {
@@ -117,6 +140,7 @@ namespace js
 
 
         }
-        
-    }
+
+	
+	}
 }
