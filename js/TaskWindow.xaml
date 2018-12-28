@@ -33,14 +33,16 @@
         <Label Grid.Row="4" Grid.Column="0" Content="Priorität"/>
         <Label Grid.Row="6" Grid.Column="0" Content="Betroffene Kontakte"/>
         <Label Grid.Row="7" Grid.Column="0" Content="Beschreibung"/>
+        <Label Grid.Row="8" Grid.Column="0" Name="ContactIds" Content="" Visibility="Hidden"/>
 
         <TextBox Grid.Row="1" Grid.Column="1" Name ="TaskTitle" Margin="8" />
         <DatePicker Grid.Row="2" Grid.Column="1" Name="StartDate" Margin="8"/>
         <DatePicker Grid.Row="3" Grid.Column="1" Name="EndDate" Margin="8"/>
         <TextBox Grid.Row="4" Grid.Column="1" Name="Priority" Margin="8"/>
-        <Button Grid.Row="5" Grid.Column="1" Content="Kontakte auswählen" Margin="8"/>
-        <ListBox Grid.Row="6" Grid.Column="1" Margin="8"/>
+        <Button Grid.Row="5" Grid.Column="1" Content="Kontakte auswählen" Margin="8" Click="Select_Contacts_Click"/>
+        <ListBox Grid.Row="6" Grid.Column="1" Margin="8" Name="SelectedContacts"/>
         <TextBox Grid.Row="7" Grid.Column="1" Name="TaskDescription" Margin="8"/>
+
 
         <CheckBox Grid.Row="8" Grid.Column="1" Content="Erledigt" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Name="TaskFinished" />
 

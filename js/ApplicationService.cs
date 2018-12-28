@@ -176,19 +176,36 @@ namespace js
 			}
 		}
 
-		public void CreateOrUpdateTask(Task task)
+		public int CreateOrUpdateTask(Task task)
 		{
 			string sql = "INSERT INTO Task (title, startDate, enddate, toDoListId, priority, taskFinished, description) VALUES (@Title, @StartDate, @EndDate, @ToDoListId, @Priority, @TaskFininshed, @Description)";
 			string sqlUpdate = "UPDATE Task SET title = @Title, startDate = @StartDate, enddate = @EndDate, priority = @Priority, taskFinished = @TaskFininshed, description = @Description WHERE id = @Id";
+            string sqlMaxId = "SELECT MAX(id) FROM Task";
 
 			using (var conn = GetSQLiteConnection())
 			{
-				if (task.Id ==0)
-					conn.Execute(sql, task);
-				else
-					conn.Execute(sqlUpdate, task);
+                if (task.Id == 0)
+                {
+                    conn.Execute(sql, task);
+                    return conn.Query<int>(sqlMaxId).FirstOrDefault();
+                }                                     
+                else
+                {
+                    conn.Execute(sqlUpdate, task);
+                }                  
 			}
+            return 0;
 		}
+
+        public void CreateTaskContact(int taskId, int contactId)
+        {
+            string sql = "INSERT INTO TaskContact (taskId, contactId) VALUES (@TaskId, @ContactId)";
+            using (var conn = GetSQLiteConnection())
+            {
+                conn.Execute(sql, new { TaskId = taskId, ContactId = contactId});
+
+            }
+        }
 
 		public void CreateOrUpdateContact(Entities.Contact contact)
 		{

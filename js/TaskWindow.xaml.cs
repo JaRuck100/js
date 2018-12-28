@@ -64,7 +64,7 @@ namespace js
 		private void Save_Click(object sender, RoutedEventArgs e)
 		{
 			int newInt;
-			_service.CreateOrUpdateTask(new Task()
+			_taskId = _service.CreateOrUpdateTask(new Task()
 			{
 				Title = TaskTitle.Text,
 				StartDate = DateTime.Parse(StartDate.Text),
@@ -76,7 +76,25 @@ namespace js
 				Id = _taskId
 			});
 
-			Abort_Click(sender, e);
+
+            List<string> contactIds = this.ContactIds.Content.ToString().Split().ToList();
+            foreach  (string id in contactIds)
+            {
+                if (id != String.Empty)
+                {
+                    _service.CreateTaskContact(_taskId, Int32.Parse(id));
+                }
+                
+            }
+
+
+            Abort_Click(sender, e);
 		}
+
+        private void Select_Contacts_Click(object sender, RoutedEventArgs e)
+        {      
+            ContactSelect nextpage = new ContactSelect(this, _userId);
+            nextpage.ShowDialog();
+        }
 	}
 }
