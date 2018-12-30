@@ -129,6 +129,15 @@ namespace js
 			return contacts;
 		}
 
+		internal void DeleteContactTask(int id, int taskId)
+		{
+			string sqlTaskFromContact = "DELETE FROM TaskContact WHERE contactId = @ContactId AND taskId = @TaskId";
+			using (var conn = GetSQLiteConnection())
+			{
+				conn.Execute(sqlTaskFromContact, new { ContactId = id, TaskId = taskId });
+			}
+		}
+
 		public Task GetTaskById(int taskId)
 		{
 			var sql = "SELECT * FROM Task WHERE id = @TaskId";

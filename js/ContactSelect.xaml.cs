@@ -45,7 +45,7 @@ namespace js
 
         private void Save_Selection (object sender, RoutedEventArgs e)
         {
-            this.Close();
+           
 			var userToRemove = new List<Contact>();
 			var userList = new List<Contact>();
 			var userNotUsedList = new List<Contact>();
@@ -79,18 +79,18 @@ namespace js
 				foreach (Contact item in userNotUsedList)
 				{
 					_taskWindow._selectedContacts.Add(item);
-					_taskWindow.SelectedContacts.Items.Add(string.Format("{0} {1}", item.FirstName, item.Surname));
 				}
-
+				
 			}
 			else
 			{
 				foreach (Contact item in this.contactSelectView.SelectedItems)
 				{
 					_taskWindow._selectedContacts.Add(item);
-					_taskWindow.SelectedContacts.Items.Add(string.Format("{0} {1}", item.FirstName, item.Surname));
 				}
 			}
+
+			this.Close();
 		}
 
 	}

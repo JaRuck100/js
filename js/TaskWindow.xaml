@@ -46,7 +46,7 @@
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0" Content="Kontakte auswählen" Margin="8" Click="Select_Contacts_Click"/>
-            <Button Grid.Column="1"  Content="Kontakte löschen" Margin="8" Click="Delete_Select_Contacts_Click"/>
+            <Button Grid.Column="1"  Content="Kontakt löschen" Margin="8" Click="Delete_Select_Contacts_Click"/>
         </Grid>
 
         <ListBox Grid.Row="6" Grid.Column="1" Margin="8" Name="SelectedContacts" Height="60" SelectionChanged="SelectedContacts_SelectionChanged"/>

@@ -31,7 +31,7 @@ namespace js
 
 			if (selectedContact != null)
 			{
-				FirstName.Text = selectedContact.FirstName;
+				FirstName.Text = selectedContact.Firstname;
 				Surname.Text = selectedContact.Surname;
 				Phone.Text = selectedContact.Phone;
 				Email.Text = selectedContact.Email;
@@ -54,7 +54,7 @@ namespace js
 				errorMessageContact.Content = "Es muss mindestens der Vor- oder Nachname gegeben werden.";
 			else
 			{
-				Entities.Contact newContact = new Entities.Contact() { FirstName = FirstName.Text, Surname = Surname.Text, Phone = Phone.Text, Street = Street.Text, City = City.Text, Email = Email.Text, Postalcode = Postalcode.Text, PicturePath = PicturePath.Text, UserId = this.userId, Id = contactId };
+				Entities.Contact newContact = new Entities.Contact() { Firstname = FirstName.Text, Surname = Surname.Text, Phone = Phone.Text, Street = Street.Text, City = City.Text, Email = Email.Text, Postalcode = Postalcode.Text, PicturePath = PicturePath.Text, UserId = this.userId, Id = contactId };
 				_service.CreateOrUpdateContact(newContact);
 				Back_Click(sender, e);
 			}

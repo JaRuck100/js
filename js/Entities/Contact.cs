@@ -8,7 +8,7 @@ namespace js.Entities
     public class Contact
     {
         public int Id { get; set; }
-        public string FirstName { get; set; }
+        public string Firstname { get; set; }
         public string Surname { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
@@ -17,5 +17,6 @@ namespace js.Entities
         public string Postalcode { get; set; }
         public string PicturePath { get; set; }
         public int UserId { get; set; }
-    }
+		public string Fullname { get { return string.Format("{0} {1}", Firstname, Surname); } }
+	}
 }

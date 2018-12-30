@@ -27,7 +27,7 @@ namespace js
 		int _userId;
 		ApplicationService _service;
 		public List<Contact> _selectedContacts;
-		List<Contact> _contatsToRemove;
+		Contact _contatToRemove;
 
 		public TaskWindow(int toDoListId, int taskId, int userId)
 		{
@@ -37,15 +37,13 @@ namespace js
 			_service = new ApplicationService();
 			_userId = userId;
 			_selectedContacts = new List<Contact>();
-			_contatsToRemove = new List<Contact>();
-
 
 			if (taskId == 0)
 			{
 				Textlabel.Content = "Neuer Task";
 			}
 			else
-			{ 
+			{
 				Textlabel.Content = "Task bearbeiten";
 				Task task = _service.GetTaskById(_taskId);
 				task.TaskFininshed = _service.GetBoolFromTask(_taskId);
@@ -56,15 +54,8 @@ namespace js
 				Priority.Text = task.Priority.ToString();
 				TaskDescription.Text = task.Description;
 				TaskFinished.IsChecked = task.TaskFininshed;
-
-				var list = _service.GetContactsByTaskId(_taskId);
-
-				foreach (var item in list)
-				{
-					_selectedContacts.Add(item);
-					SelectedContacts.Items.Add(string.Format("{0} {1}", item.FirstName, item.Surname));
-				}
-				
+				_selectedContacts.AddRange(_service.GetContactsByTaskId(_taskId));
+				ReloadTaskContacts();
 			}
 		}
 
@@ -79,7 +70,7 @@ namespace js
 		private void Save_Click(object sender, RoutedEventArgs e)
 		{
 			int newInt;
-		     _service.CreateOrUpdateTask(new Task()
+			_service.CreateOrUpdateTask(new Task()
 			{
 				Title = TaskTitle.Text,
 				StartDate = DateTime.Parse(StartDate.Text),
@@ -90,33 +81,55 @@ namespace js
 				ToDoListId = _toDoListId,
 				Id = _taskId
 			});
-			
-            foreach(Contact contact in _selectedContacts)
-            {
+
+			foreach (Contact contact in _selectedContacts)
+			{
 				if (contact.Id != 0)
 				{
 					_service.CreateTaskContact(_taskId, contact.Id);
 				}
-            }
-			
-            Abort_Click(sender, e);
+			}
+
+			Abort_Click(sender, e);
 		}
 
-        private void Select_Contacts_Click(object sender, RoutedEventArgs e)
-        {      
-            ContactSelect nextpage = new ContactSelect(this, _userId);
-            nextpage.ShowDialog();
-        }
+		private void Select_Contacts_Click(object sender, RoutedEventArgs e)
+		{
+			ContactSelect nextpage = new ContactSelect(this, _userId);
+			nextpage.Closed += ReloadTaskContactsHandler;
+			nextpage.ShowDialog();
+
+		}
+
+		public void ReloadTaskContactsHandler(object sender, EventArgs e)
+		{
+			ReloadTaskContacts();
+			ContactSelect nextpage = new ContactSelect(this, _userId);
+			nextpage.Closed -= ReloadTaskContactsHandler;
+		}
 
 		private void Delete_Select_Contacts_Click(object sender, RoutedEventArgs e)
 		{
-
+			if (_contatToRemove != null && _contatToRemove.Id != 0)
+			{
+				_selectedContacts.Remove(_contatToRemove);
+				ReloadTaskContacts();
+			}
 		}
-
 
 		private void SelectedContacts_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
+			_contatToRemove = (Contact)this.SelectedContacts.SelectedItem;
 
+		}
+
+		public void ReloadTaskContacts()
+		{
+			var list = _selectedContacts;
+			
+			SelectedContacts.ItemsSource = list;
+			SelectedContacts.DisplayMemberPath = "Fullname";
+			SelectedContacts.Items.Refresh();
 		}
 	}
 }
