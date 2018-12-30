@@ -43,7 +43,8 @@ namespace js
 				Postalcode.Text = selectedContact.Postalcode;
 				contactId = selectedContact.Id;
 				titleForAddEdit.Content = "Kontakt bearbeiten";
-				ContactPicture.Source = new BitmapImage(new Uri(selectedContact.PicturePath));
+				if(File.Exists(selectedContact.PicturePath))
+					ContactPicture.Source = new BitmapImage(new Uri(selectedContact.PicturePath));
 			}
 			else
 			{
