@@ -7,7 +7,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace js
+namespace js.Service
 {
 	public class ApplicationService
 	{

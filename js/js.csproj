@@ -90,16 +90,14 @@
     <Compile Include="CreateToDoList.xaml.cs">
       <DependentUpon>CreateToDoList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DatabaseConnection.cs" />
-    <Compile Include="ApplicationService.cs" />
+    <Compile Include="Service\DatabaseConnection.cs" />
+    <Compile Include="Service\ApplicationService.cs" />
     <Compile Include="Entities\TaskContact.cs" />
     <Compile Include="Entities\ToDoList.cs" />
-    <Compile Include="Tables\UserTable.cs" />
     <Compile Include="Entities\Task.cs" />
     <Compile Include="TaskWindow.xaml.cs">
       <DependentUpon>TaskWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Test\ApplicationServiceTestsCases.cs" />
     <Compile Include="ToDoListWindow.xaml.cs">
       <DependentUpon>ToDoListWindow.xaml</DependentUpon>
     </Compile>

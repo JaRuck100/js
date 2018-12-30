@@ -10,7 +10,7 @@ using System.Security.Cryptography;
 
 
 
-namespace js
+namespace js.Service
 {
     public class DatabaseConnection
     {

@@ -1,24 +1,13 @@
 ﻿using js.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using js.Service;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace js
 {
-    /// <summary>
-    /// Interaction logic for CreateToDoList.xaml
-    /// </summary>
-    public partial class CreateToDoList : Window
+	/// <summary>
+	/// Interaction logic for CreateToDoList.xaml
+	/// </summary>
+	public partial class CreateToDoList : Window
     {
         ApplicationService _service;
 		int _userId;

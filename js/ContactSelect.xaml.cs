@@ -1,24 +1,14 @@
-﻿using System;
+﻿using js.Service;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Contact = js.Entities.Contact;
+using js.Entities;
 
 namespace js
 {
-    /// <summary>
-    /// Interaktionslogik für ContactSelect.xaml
-    /// </summary>
-    public partial class ContactSelect : Window
+	/// <summary>
+	/// Interaktionslogik für ContactSelect.xaml
+	/// </summary>
+	public partial class ContactSelect : Window
     {
         int _userId;
         ApplicationService _service;
