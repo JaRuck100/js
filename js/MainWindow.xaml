@@ -17,7 +17,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  Content="Login-Seite" FontSize="30" Margin="2"/>
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center"  Content="Login-Seite" FontSize="30" Margin="2"/>
         <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="errorMessageText" VerticalAlignment="Bottom" Foreground="Red" Margin="2"/>
         <Label Grid.Row="2" Grid.Column="0" Content="Username:" Margin="8" />
         <TextBox Grid.Row="2" Grid.Column="2" x:Name="usernameText" Margin="8"/>
