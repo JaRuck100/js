@@ -56,11 +56,12 @@ namespace js
 
 		private void Edit_Click(object sender, RoutedEventArgs e)
 		{
-			this.Close();
+			
 			if (_toDoId == 0)
 				errorMessageContact.Content = "Eine Todo-Liste muss zum Beareiten ausgewählt werden.";
 			else
 			{
+				this.Close();
 				CreateToDoList nextpage = new CreateToDoList(_userId, _toDoId);
 				nextpage.ShowDialog();
 			}
@@ -113,11 +114,12 @@ namespace js
 
 		private void EditTask_Click(object sender, RoutedEventArgs e)
 		{
-			this.Close();
+			
 			if (_taskId == 0)
 				errorMessageContact.Content = "Ein Task muss zum Bearbeiten ausgewählt werden.";
 			else
 			{
+				this.Close();
 				TaskWindow nextpage = new TaskWindow(_toDoId, _taskId, _userId);
 				nextpage.ShowDialog();
 			}

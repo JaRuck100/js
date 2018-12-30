@@ -1,7 +1,7 @@
 ﻿<Window x:Class="js.ContactSelect"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Contact" Height="400" Width="600">
+        Height="400" Width="600">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -12,13 +12,11 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="0"/>
         </Grid.ColumnDefinitions>
 
-        <Label Grid.ColumnSpan="3" Grid.Row="0" Content="Kontaktliste" Margin="8"/>
+        <Label Grid.ColumnSpan="2" Grid.Row="0" Content="Kontaktliste" Margin="8" FontSize="30"/>
 
-        <ListView x:Name="contactSelectView" Grid.ColumnSpan="3" Margin="8" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+        <ListView x:Name="contactSelectView" Grid.ColumnSpan="2" Margin="8" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Surname}"/>
@@ -34,6 +32,6 @@
         </ListView>
 
         <Button Margin="8" Grid.Row="2" Grid.Column="0" Content="Abbrechen"  Click="Back_Click"/>
-        <Button Margin="8" Grid.Row="2" Grid.Column="2" Content="Auswahl speichern" Click="Save_Selection"/>
+        <Button Margin="8" Grid.Row="2" Grid.Column="1" Content="Auswahl speichern" Click="Save_Selection"/>
     </Grid>
 </Window>
