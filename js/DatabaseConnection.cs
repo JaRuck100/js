@@ -94,7 +94,7 @@ namespace js
 
         public static void createTaskContactTable(SQLiteConnection dbConnection)
         {
-            string sql = "CREATE TABLE IF NOT EXISTS TaskContact (taskId INTEGER, contactId INT, PRIMARY KEY (taskId, contactId), FOREIGN KEY(taskId) REFERENCES Task(id), FOREIGN KEY(contactId) REFERENCES Contact(id))";
+            string sql = "CREATE TABLE IF NOT EXISTS TaskContact (id INTEGER PRIMARY KEY AUTOINCREMENT,  taskId INTEGER, contactId INT , FOREIGN KEY(taskId) REFERENCES Task(id), FOREIGN KEY(contactId) REFERENCES Contact(id))";
             SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
             command.ExecuteNonQuery();
         }

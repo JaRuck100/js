@@ -147,6 +147,17 @@ namespace js
 			}
 		}
 
+		public List<Contact> GetContactsByTaskId(int taskId)
+		{
+
+			string sql = String.Format("SELECT * FROM Contact WHERE id IN (SELECT contactId FROM TaskContact WHERE taskId = @TaskId)");
+
+			using (var con = GetSQLiteConnection())
+			{
+				return con.Query<Contact>(sql, new { TaskId = taskId }).ToList();
+			}
+		}
+
 		public List<string> GetContactNameByTaskId(int taskId)
 		{
 			List<string> contactNames = new List<string>();
@@ -199,11 +210,14 @@ namespace js
 
         public void CreateTaskContact(int taskId, int contactId)
         {
-            string sql = "INSERT INTO TaskContact (taskId, contactId) VALUES (@TaskId, @ContactId)";
+			string sqlSelect = "Select * from TaskContact where taskId = @TaskId AND contactId = @ContactId";
+			string sql = "INSERT INTO TaskContact (taskId, contactId) VALUES (@TaskId, @ContactId)";
+
             using (var conn = GetSQLiteConnection())
             {
-                conn.Execute(sql, new { TaskId = taskId, ContactId = contactId});
-
+				var taskContact= conn.Query<TaskContact>(sqlSelect, new { TaskId = taskId, ContactId = contactId }).FirstOrDefault();
+				if(taskContact== null)
+					conn.Execute(sql, new { TaskId = taskId, ContactId = contactId});
             }
         }
 

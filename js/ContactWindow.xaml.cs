@@ -21,7 +21,7 @@ namespace js
     public partial class ContactWindow : Window
     {
         ApplicationService _service;
-        int userId;
+		int userId;
         Contact selectedContact;
 
         public ContactWindow(int userId)

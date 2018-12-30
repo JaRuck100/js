@@ -30,7 +30,8 @@ namespace js
             _service = new ApplicationService();
             _userId = userId;
             _taskWindow = taskWindow;
-            List<Contact> Contact = _service.GetContactsByUserId(userId);
+
+			List<Contact> Contact = _service.GetContactsByUserId(userId);
             foreach (Contact contact in Contact)
             {
                 this.contactSelectView.Items.Add(contact);
@@ -45,14 +46,52 @@ namespace js
         private void Save_Selection (object sender, RoutedEventArgs e)
         {
             this.Close();
-            var selectedElemts = this.contactSelectView.SelectedItems;
-            foreach (Contact contact in selectedElemts)
-            {
-                _taskWindow.SelectedContacts.Items.Add(contact.FirstName + " " + contact.Surname);
-                _taskWindow.ContactIds.Content += contact.Id.ToString() + " "; 
-                
-            }
-            
-        }
-    }
+			var userToRemove = new List<Contact>();
+			var userList = new List<Contact>();
+			var userNotUsedList = new List<Contact>();
+
+			if (_taskWindow._selectedContacts.Count != 0)
+			{
+				foreach (Contact item in this.contactSelectView.SelectedItems)
+				{
+					userList.Add(item);
+					userNotUsedList.Add(item);
+					foreach (var contact in _taskWindow._selectedContacts)
+					{
+						if (contact.Id == item.Id)
+						{
+							userToRemove.Add(contact);
+							continue;
+						}
+					}
+				}
+
+				foreach (var item in userList)
+				{
+					foreach (var contact in userToRemove)
+					{
+						if (contact.Id == item.Id)
+						{
+							userNotUsedList.Remove(item);
+						}
+					}
+				}
+				foreach (Contact item in userNotUsedList)
+				{
+					_taskWindow._selectedContacts.Add(item);
+					_taskWindow.SelectedContacts.Items.Add(string.Format("{0} {1}", item.FirstName, item.Surname));
+				}
+
+			}
+			else
+			{
+				foreach (Contact item in this.contactSelectView.SelectedItems)
+				{
+					_taskWindow._selectedContacts.Add(item);
+					_taskWindow.SelectedContacts.Items.Add(string.Format("{0} {1}", item.FirstName, item.Surname));
+				}
+			}
+		}
+
+	}
 }

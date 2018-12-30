@@ -92,6 +92,7 @@
     </Compile>
     <Compile Include="DatabaseConnection.cs" />
     <Compile Include="ApplicationService.cs" />
+    <Compile Include="Entities\TaskContact.cs" />
     <Compile Include="Entities\ToDoList.cs" />
     <Compile Include="Tables\UserTable.cs" />
     <Compile Include="Entities\Task.cs" />

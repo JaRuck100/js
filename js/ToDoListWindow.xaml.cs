@@ -12,7 +12,7 @@ namespace js
 	/// </summary>
 	public partial class ToDoListWindow : Window
     {
-        int _userId;
+		int _userId;
         ApplicationService _service;
 		int _taskId;
 		int _toDoId;
