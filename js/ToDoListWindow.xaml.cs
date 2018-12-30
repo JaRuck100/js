@@ -32,17 +32,24 @@ namespace js
 				toDoListTitle.Name = "toDoList" + toDoListItem.Id.ToString();
 				ToDoListList.Items.Add(toDoListTitle);
 				List<Task> tasks = _service.GetTaksByToDoListId(toDoListItem.Id);
+				int finishedCount = 0;
 				foreach (var task in tasks)
 				{
 					TreeViewItem taskTitle = new TreeViewItem();
 					taskTitle.Header = task.Title;
 
 					if (_service.GetBoolFromTask(task.Id))
+					{
 						taskTitle.Header += " (erledigt)";
+						finishedCount++;
+					}
 
 					taskTitle.Name = "task" + task.Id.ToString();
 					toDoListTitle.Items.Add(taskTitle);
 				}
+				if(finishedCount == tasks.Count)
+					toDoListTitle.Header += " (erledigt)";
+
 			}
 		}
 
