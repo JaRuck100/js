@@ -47,7 +47,7 @@ namespace js
 					taskTitle.Name = "task" + task.Id.ToString();
 					toDoListTitle.Items.Add(taskTitle);
 				}
-				if(finishedCount == tasks.Count)
+				if(finishedCount == tasks.Count && finishedCount != 0)
 					toDoListTitle.Header += " (erledigt)";
 
 			}
