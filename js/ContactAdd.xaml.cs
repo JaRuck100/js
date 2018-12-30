@@ -34,7 +34,7 @@ namespace js
 				Postalcode.Text = selectedContact.Postalcode;
 				contactId = selectedContact.Id;
 				titleForAddEdit.Content = "Kontakt bearbeiten";
-				if(File.Exists(selectedContact.PicturePath))
+				if (selectedContact.PicturePath != string.Empty && File.Exists(selectedContact.PicturePath))
 					ContactPicture.Source = new BitmapImage(new Uri(selectedContact.PicturePath));
 			}
 			else
@@ -53,7 +53,7 @@ namespace js
 				string data = programmPath + picturename;
 				int number = 1;
 				int picterNumber = 0;
-				if (path != string.Empty  && picturename != null)
+				if (path != string.Empty && picturename != null)
 				{
 					if (!Directory.Exists(programmPath))
 						Directory.CreateDirectory(programmPath);
@@ -62,7 +62,8 @@ namespace js
 						File.Copy(path, data);
 					else
 					{
-						var list = Directory.GetFiles(programmPath, picturename);
+						var picturesearch = picturename.Substring(0, picturename.LastIndexOf('.')) + "*.*";
+						var list = Directory.GetFiles(programmPath, picturesearch);
 						if (list.Length == 1)
 							number = 1;
 						else
@@ -70,13 +71,18 @@ namespace js
 							foreach (var item in list)
 							{
 								string pictureCopyName = item;
-								pictureCopyName = pictureCopyName.Substring(pictureCopyName.LastIndexOf('_'));
-								var pictureCopyNameNumber = pictureCopyName.Remove(0,1);
-								if (int.TryParse(pictureCopyNameNumber, out picterNumber))
-									number = int.Parse(pictureCopyNameNumber);
+								if (pictureCopyName.Contains("_"))
+								{
+									pictureCopyName = pictureCopyName.Substring(pictureCopyName.LastIndexOf('_'));
+									var pictureCopyNameNumber = pictureCopyName.Remove(0, 1);
+									pictureCopyNameNumber = pictureCopyNameNumber.Remove(1);
+									if (int.TryParse(pictureCopyNameNumber, out picterNumber))
+										if (picterNumber >= number)
+											number = picterNumber+1;
+								}
 							}
 						}
-						data = data.Substring(0,data.LastIndexOf('.')) + "_" + number + data.Substring(data.LastIndexOf('.'));
+						data = data.Substring(0, data.LastIndexOf('.')) + "_" + number + data.Substring(data.LastIndexOf('.'));
 						databasePath = data;
 						File.Copy(path, databasePath);
 					}
@@ -95,7 +101,7 @@ namespace js
 					PicturePath = databasePath,
 					UserId = this.userId,
 					Id = contactId
-				
+
 				};
 				_service.CreateOrUpdateContact(newContact);
 				Back_Click(sender, e);

@@ -23,10 +23,10 @@ namespace js
 			var password = passwordText.Password;
 			var passwortUsernameRight = false;
 
-#if DEBUG
+/*#if DEBUG
 			username = "sunny";
 			password = "123";
-#endif
+#endif*/
 			if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
 			{
 				var user = _service.CheckUser(username, password);

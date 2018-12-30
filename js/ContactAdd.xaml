@@ -25,7 +25,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <Label x:Name="titleForAddEdit" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="30" Margin="5"/>
+        <Label x:Name="titleForAddEdit" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="30" Margin="8"/>
         <Label x:Name="errorMessageContact" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Bottom" Foreground="Red" Margin="2" />
 
         <Label Grid.Row="2" Grid.Column="0" Content="Vorname" Margin="5"/>

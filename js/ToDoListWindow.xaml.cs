@@ -1,4 +1,5 @@
-﻿using js.Entities;
+﻿using FontAwesome.WPF;
+using js.Entities;
 using js.Service;
 using System.Collections.Generic;
 using System.Windows;
@@ -15,6 +16,8 @@ namespace js
 		ApplicationService _service;
 		int _taskId;
 		int _toDoId;
+		int _iconWidth = 8;
+		int _iconHeight = 8;
 
 		public ToDoListWindow(int userId)
 		{
@@ -27,28 +30,58 @@ namespace js
 
 			foreach (var toDoListItem in toDoLists)
 			{
+				//Zusammenbau eines Items
+				StackPanel toDoNonCheck = new StackPanel() { Orientation = Orientation.Horizontal };
+				ImageAwesome image = new ImageAwesome() { Icon = FontAwesomeIcon.Close, Width= _iconWidth, Height= _iconHeight, HorizontalAlignment  = HorizontalAlignment.Center};
+				TextBlock textBox = new TextBlock() { Text = toDoListItem.Title+" " };
+				toDoNonCheck.Children.Add(textBox);
+				toDoNonCheck.Children.Add(image);
+
+				StackPanel toDoCheck = new StackPanel() { Orientation = Orientation.Horizontal };
+				image = new ImageAwesome() { Icon = FontAwesomeIcon.Check, Width = _iconWidth, Height = _iconHeight , HorizontalAlignment = HorizontalAlignment.Center };
+				textBox = new TextBlock() { Text = toDoListItem.Title + " " };
+				toDoCheck.Children.Add(textBox);
+				toDoCheck.Children.Add(image);
+
+
 				TreeViewItem toDoListTitle = new TreeViewItem();
-				toDoListTitle.Header = toDoListItem.Title;
+				toDoListTitle.Header = toDoNonCheck;
 				toDoListTitle.Name = "toDoList" + toDoListItem.Id.ToString();
 				ToDoListList.Items.Add(toDoListTitle);
 				List<Task> tasks = _service.GetTaksByToDoListId(toDoListItem.Id);
 				int finishedCount = 0;
+
 				foreach (var task in tasks)
 				{
+
+
+					StackPanel taskNonCheck = new StackPanel() { Orientation = Orientation.Horizontal };
+					image = new ImageAwesome() { Icon = FontAwesomeIcon.Close, Width = _iconWidth, Height = _iconHeight , HorizontalAlignment = HorizontalAlignment.Center };
+					textBox = new TextBlock() { Text = task.Title + " " };
+					taskNonCheck.Children.Add(textBox);
+					taskNonCheck.Children.Add(image);
+
+					StackPanel taskCheck = new StackPanel() { Orientation = Orientation.Horizontal };
+					image = new ImageAwesome() { Icon = FontAwesomeIcon.Check, Width = _iconWidth, Height = _iconHeight, HorizontalAlignment = HorizontalAlignment.Center };
+					textBox = new TextBlock() { Text = task.Title + " " };
+					taskCheck.Children.Add(textBox);
+					taskCheck.Children.Add(image);
+
+
 					TreeViewItem taskTitle = new TreeViewItem();
-					taskTitle.Header = task.Title;
+					taskTitle.Header = taskNonCheck;
 
 					if (_service.GetBoolFromTask(task.Id))
 					{
-						taskTitle.Header += " (erledigt)";
+						taskTitle.Header = taskCheck;
 						finishedCount++;
 					}
 
 					taskTitle.Name = "task" + task.Id.ToString();
 					toDoListTitle.Items.Add(taskTitle);
 				}
-				if(finishedCount == tasks.Count)
-					toDoListTitle.Header += " (erledigt)";
+				if(finishedCount == tasks.Count && finishedCount != 0)
+					toDoListTitle.Header = toDoCheck;
 
 			}
 		}
