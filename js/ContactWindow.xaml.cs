@@ -20,13 +20,11 @@ namespace js
             InitializeComponent();
             _service = new ApplicationService();
             this.userId = userId;
-            List<Contact> Contact = _service.GetContactsByUserId(userId);
-            foreach (Contact contact in Contact)
-            {
-                this.contactView.Items.Add(contact);
-            }
-            
-        }
+            List<Contact> contacts = _service.GetContactsByUserId(userId);
+
+			contactView.ItemsSource = contacts;
+
+		}
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
