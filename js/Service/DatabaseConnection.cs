@@ -80,21 +80,21 @@ namespace js.Service
 
         public static void createTaskTable(SQLiteConnection dbConnection)
         {
-            string sql = "CREATE TABLE IF NOT EXISTS Task (id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(255) NOT NULL, startDate DATE NOT NULL, enddate DATE NOT NULL, toDoListId INT, priority INT NOT NULL, taskFinished boolean, description VARCHAR(1024), FOREIGN KEY(toDoListId) REFERENCES ToDoList(id))";
+            string sql = "CREATE TABLE IF NOT EXISTS Task (id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(255) NOT NULL, startDate DATE NOT NULL, enddate DATE NOT NULL, toDoListId INT NOT NULL, priority INT NOT NULL, taskFinished boolean, description VARCHAR(1024), FOREIGN KEY(toDoListId) REFERENCES ToDoList(id))";
             SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
             command.ExecuteNonQuery();
         }
 
         public static void createContact(SQLiteConnection dbConnection)
         {
-			string sql = "CREATE TABLE IF NOT EXISTS Contact (id INTEGER PRIMARY KEY AUTOINCREMENT, firstName VARCHAR(50) NOT NULL, surname VARCHAR(50) NOT NULL, phone VARCHAR(50), email VARCHAR(100) NOT NULL, street VARCHAR(50) NOT NULL, city VARCHAR(50) NOT NULL, postalCode VARCHAR(5) NOT NULL, picturePath VARCHAR(250), userId INTEGER NOT NULL, FOREIGN KEY(userId) REFERENCES User(id))";
+			string sql = "CREATE TABLE IF NOT EXISTS Contact (id INTEGER PRIMARY KEY AUTOINCREMENT, firstName VARCHAR(50) NOT NULL, surname VARCHAR(50) NOT NULL, phone VARCHAR(50), email VARCHAR(100), street VARCHAR(50) , city VARCHAR(50) , postalCode VARCHAR(5) , picturePath VARCHAR(250), userId INTEGER NOT NULL, FOREIGN KEY(userId) REFERENCES User(id))";
             SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
             command.ExecuteNonQuery();
         }
 
         public static void createTaskContactTable(SQLiteConnection dbConnection)
         {
-            string sql = "CREATE TABLE IF NOT EXISTS TaskContact (id INTEGER PRIMARY KEY AUTOINCREMENT,  taskId INTEGER, contactId INT , FOREIGN KEY(taskId) REFERENCES Task(id), FOREIGN KEY(contactId) REFERENCES Contact(id))";
+            string sql = "CREATE TABLE IF NOT EXISTS TaskContact (id INTEGER PRIMARY KEY AUTOINCREMENT,  taskId INTEGER NOT NULL, contactId INT NOT NULL, FOREIGN KEY(taskId) REFERENCES Task(id), FOREIGN KEY(contactId) REFERENCES Contact(id))";
             SQLiteCommand command = new SQLiteCommand(sql, dbConnection);
             command.ExecuteNonQuery();
         }

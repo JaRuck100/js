@@ -12,6 +12,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -19,13 +20,15 @@
         </Grid.RowDefinitions>
 
         <Label Content="ToDoListen" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" HorizontalAlignment="Center" FontSize="40"/>
-        <TreeView x:Name="ToDoListList" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="7" SelectedItemChanged="selectedElement" />
+        <Label x:Name="errorMessageContact" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Bottom" Foreground="Red" Margin="2" />
 
-        <Button Grid.Row="2" Grid.Column="0" Content="Neue Liste" Click="Create_Click" Margin="8"/>
-        <Button Grid.Row="2" Grid.Column="1" Content="Neuer Task" Click="CreateTask_Click" Margin="8" />
-        <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Content="Löschen" Click="Delete_Click" Margin="8"/>
-        <Button Grid.Row="3" Grid.Column="0" Content="Liste bearbeiten" Click="Edit_Click" Margin="8"/>
-        <Button Grid.Row="3" Grid.Column="1" Content="Task bearbeiten" Click="CreateTask_Click" Margin="8"/>
+        <TreeView x:Name="ToDoListList" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="7" SelectedItemChanged="selectedElement" />
+
+        <Button Grid.Row="3" Grid.Column="0" Content="Neue Liste" Click="Create_Click" Margin="8"/>
+        <Button Grid.Row="3" Grid.Column="1" Content="Neuer Task" Click="CreateTask_Click" Margin="8" />
+        <Button Grid.Row="4" Grid.Column="0" Content="Liste bearbeiten" Click="Edit_Click" Margin="8"/>
+        <Button Grid.Row="4" Grid.Column="1" Content="Task bearbeiten" Click="EditTask_Click" Margin="8"/>
+        <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Content="Löschen" Click="Delete_Click" Margin="8"/>
 
     </Grid>
 </Window>

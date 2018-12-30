@@ -36,7 +36,11 @@ namespace js
 				nextpage.Show();
 				this.Close();
 			}
-        }
+			else
+			{
+				errorMessageContact.Content = "Ein Kontakt muss gewählt sein.";
+			}
+		}
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
@@ -47,13 +51,17 @@ namespace js
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            if (selectedContact != null)
-            {
-                _service.DeleteContact(selectedContact.Id);
+			if (selectedContact != null)
+			{
+				_service.DeleteContact(selectedContact.Id);
 				ContactWindow nextpage = new ContactWindow(userId);
-                nextpage.Show();
-                this.Close();
-            }
+				nextpage.Show();
+				this.Close();
+			}
+			else
+			{
+				errorMessageContact.Content = "Ein Kontakt muss gewählt sein.";
+			}
 
         }
 

@@ -37,12 +37,19 @@ namespace js
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             string title = Title.Text;
-            if (!_service.IsToDoListTitleAlreadyUsed(title))
-            {
-                _service.CreateOrUpdateToDoList(new ToDoList() { Title = title, UserId = _userId, Id = _toDoListId });
-                this.Close();
+
+			if (title == string.Empty)
+			{
+				errorMessageContact.Content = "Der Titel muss gegeben sein.";
+			}
+			else if (!_service.IsToDoListTitleAlreadyUsed(title))
+			{
+				_service.CreateOrUpdateToDoList(new ToDoList() { Title = title, UserId = _userId, Id = _toDoListId });
+				this.Close();
 				Back_Click(sender, e);
-            }
+			}
+			else if (_service.IsToDoListTitleAlreadyUsed(title))
+				errorMessageContact.Content = "Listenname ist schon vergeben.";
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)

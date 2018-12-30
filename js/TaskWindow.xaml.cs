@@ -32,7 +32,7 @@ namespace js
 
 			if (taskId == 0)
 			{
-				Textlabel.Content = "Neuer Task";
+				Textlabel.Content = "Neuen Task hinzufügen";
 			}
 			else
 			{
@@ -61,28 +61,35 @@ namespace js
 
 		private void Save_Click(object sender, RoutedEventArgs e)
 		{
-			int newInt;
-			_service.CreateOrUpdateTask(new Task()
-			{
-				Title = TaskTitle.Text,
-				StartDate = DateTime.Parse(StartDate.Text),
-				EndDate = DateTime.Parse(EndDate.Text),
-				Priority = int.TryParse(Priority.Text, out newInt) ? newInt : 0,
-				Description = TaskDescription.Text,
-				TaskFininshed = TaskFinished.IsChecked.Value,
-				ToDoListId = _toDoListId,
-				Id = _taskId
-			});
 
-			foreach (Contact contact in _selectedContacts)
+			if (StartDate.Text != string.Empty && EndDate.Text != string.Empty && TaskTitle.Text != string.Empty)
 			{
-				if (contact.Id != 0)
+				int newInt;
+				_service.CreateOrUpdateTask(new Task()
 				{
-					_service.CreateTaskContact(_taskId, contact.Id);
-				}
-			}
+					Title = TaskTitle.Text,
+					StartDate = DateTime.Parse(StartDate.Text),
+					EndDate = DateTime.Parse(EndDate.Text),
+					Priority = int.TryParse(Priority.Text, out newInt) ? newInt : 0,
+					Description = TaskDescription.Text,
+					TaskFininshed = TaskFinished.IsChecked.Value,
+					ToDoListId = _toDoListId,
+					Id = _taskId
+				});
 
-			Abort_Click(sender, e);
+				foreach (Contact contact in _selectedContacts)
+				{
+					if (contact.Id != 0)
+					{
+						_service.CreateTaskContact(_taskId, contact.Id);
+					}
+				}
+
+				Abort_Click(sender, e);
+			}
+			else {
+				errorMessageContact.Content = "Titel, Startdatum und Enddatum müssen gegeben sein.";
+			}
 		}
 
 		private void Select_Contacts_Click(object sender, RoutedEventArgs e)

@@ -45,8 +45,8 @@ namespace js
 
 		private void Add_Click(object sender, RoutedEventArgs e)
 		{
-			if (FirstName.Text.Length + Surname.Text.Length == 0)
-				errorMessageContact.Content = "Es muss mindestens der Vor- oder Nachname gegeben werden.";
+			if (FirstName.Text == string.Empty && Surname.Text == string.Empty)
+				errorMessageContact.Content = "Es müssen Vor- oder Nachname gegeben werden.";
 			else
 			{
 				string databasePath = string.Empty;

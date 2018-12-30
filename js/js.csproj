@@ -101,9 +101,6 @@
     <Compile Include="ToDoListWindow.xaml.cs">
       <DependentUpon>ToDoListWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ToDoListContact.xaml.cs">
-      <DependentUpon>ToDoListContact.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Entities\User.cs" />
     <Compile Include="Welcome.xaml.cs">
       <DependentUpon>Welcome.xaml</DependentUpon>
@@ -141,10 +138,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ToDoListWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ToDoListContact.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
