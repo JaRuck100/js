@@ -233,7 +233,7 @@ namespace js
 		public void CreateOrUpdateContact(Entities.Contact contact)
 		{
 			string sqlAdd = "INSERT INTO Contact (firstName, surname, phone, email, street, city, postalCode, picturePath, userId) VALUES (@Firstname, @Surname, @Phone, @Email, @Street, @City, @Postalcode, @PicturePath, @UserId)";
-			string sqlUpdate = "UPDATE Contact SET firstName = @Firstname, surname = @Surname, phone = @Phone', email = @Email, street = @Street, city = @City, postalCode = @Postalcode, picturePath = @PicturePath WHERE id = @Id";
+			string sqlUpdate = "UPDATE Contact SET firstName = @Firstname, surname = @Surname, phone = @Phone, email = @Email, street = @Street, city = @City, postalCode = @Postalcode, picturePath = @PicturePath WHERE id = @Id";
 
 			using (var conn = GetSQLiteConnection())
 			{
